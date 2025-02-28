@@ -10,8 +10,13 @@ import ReactDOM from 'react-dom/client'
 // import Counter from './App5.jsx'
 // import App6 from './App6.jsx'
 // import Counter from './App7.jsx'
-import App8 from './App8.jsx'
-import Counter from './App9.jsx'
+// import App8 from './App8.jsx'
+// import Counter from './App9.jsx'
+// import App from './App10.jsx'
+// import App from './App11.jsx'
+// import App from './App12.jsx'
+// import App from './App13.jsx'
+import App from './App14.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -27,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* <App6 /> */}
     {/* <Counter /> */}
     {/* <App8 /> */}
-    <Counter />
+    {/* <Counter /> */}
+    <App />
   </React.StrictMode>,
 )
