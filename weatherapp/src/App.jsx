@@ -1,35 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useEffect } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [weather, setWeather] = useState({
+    temp: '',
+    desc: '',
+    icon: '',
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  });
+
+  useEffect(() => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&units=Metric&APIkey=bdff61d6ba94aeaa2e47bed54157fca6`)
+    .then(response => response.json())
+    .then(result => {
+      setWeather({temp: result.main.temp,
+        desc: result.weather[0].description,
+        icon: result.weather[0].icon,
+      })
+    })
+    .catch(err => console.log(err))
+  })
+  if(weather.icon){
+    return (
+      <>
+        <p>온도 : {weather.temp} 도</p>
+        <p>설명 : {weather.desc} 도</p>
+        <img src={`http://openweathermap.org/img/wn/${weather.icon}@2.png`} alt="날씨 아이콘" />
+        
+      </>
+    )
+  }
+  else{
+    return <div>로딩 중...</div>
+  }
 }
 
 export default App
