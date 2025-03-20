@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Context from "../context/Context";
 
-export default function LoginForm({ state, dispatch }) {
-  const [ id, setId ] = useState('');
-  const [ password, setPassword ] = useState('');
 
-  const userInfo = { 
-    id: 'react',
+function LoginForm() {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const {state, dispatch} = useContext(Context);
+
+  const userInfo = {
+    id: 'react'
     password: 'qwer1234',
-  };
 
+  };
+  
   const handleLoginForm = (event) => {
     event.preventDefault();
-
     if (id === userInfo.id && password === userInfo.password) {
       dispatch({type: "LOGIN_SUCCESS", payload: userInfo});
     } else if (id !== userInfo.id && password === userInfo.password) {
@@ -23,23 +27,26 @@ export default function LoginForm({ state, dispatch }) {
     }
   };
 
-  return(
+
+
+  return (
     <form action="" onSubmit={handleLoginForm}>
-      <label>아이디</label>
+      <label>아이디(ID)</label>
       <input type="text" 
-        placeholder='type your id' 
-        onChange={(event) => setId(event.target.value)} />
+      placeholder="아이디(ID)를 입력하세요 :)" 
+      onClick={(event) => setId(event.target.value)}
+      />
       <br />
       <br />
-      <label>패스워드</label>
-        <input type="text" 
-          placeholder='type your password' 
-          onChange={(event) => setPassword(event.target.value)} />
+      <label>비밀번호(PASSWORD)</label>
+      <input type="text" 
+      placeholder="비밀번호(PASSWORD)를 입력하세요 :)" 
+      onClick={(event) => setPassword(event.target.value)}
+      />
       <br />
-      <br />
-      <button>로그인 하기</button>
-      <br />
-      <p>{state.message}</p>
+      <button>Sign In</button>
     </form>
   );
 }
+
+export default LoginForm
